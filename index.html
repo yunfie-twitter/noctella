@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Noctella Media</title>
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#000000" />
+
+  <!-- PWA用アイコン -->
+  <link rel="icon" href="icon-192.png" />
+  <link rel="apple-touch-icon" href="icon-512.png" />
+
+  <script>
+    // PWA（スタンドアロンモード）で開かれていたらリダイレクト
+    if (window.matchMedia('(display-mode: standalone)').matches) {
+      window.location.href = "https://media.noctella.fun";
+    }
+
+    // iOSなどの判定用 fallback
+    window.addEventListener('DOMContentLoaded', () => {
+      if (navigator.standalone) {
+        window.location.href = "https://media.noctella.fun";
+      }
+    });
+  </script>
+</head>
+<body>
+  <h1>読み込み中...</h1>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./sw.js')
+        .then(() => console.log("Service Worker 登録成功"))
+        .catch(err => console.error("Service Worker 登録失敗:", err));
+    }
+  </script>
+</body>
+</html>
